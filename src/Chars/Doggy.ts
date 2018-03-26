@@ -41,7 +41,9 @@ export class Doggy extends ex.Actor {
   public update() {
     const directionVec = this._getDirectionVec();
 
-    this.rotation = directionVec.toAngle() + Math.PI / 2;
+    if (directionVec.distance() !== 0) {
+      this.rotation = this._getDirectionVec().toAngle() + Math.PI / 2;
+    }
 
     this.pos = this.pos.add(directionVec);
   }
