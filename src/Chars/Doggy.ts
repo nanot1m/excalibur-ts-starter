@@ -3,9 +3,47 @@ import * as ex from "excalibur";
 const width = 40;
 const height = 40;
 
+const ROTATE_SPEED = 1 / 12;
+const MOVE_SPEED = 4;
+
 export class Doggy extends ex.Actor {
+  private pressedKeys: { [key: number]: boolean } = {
+    [ex.Input.Keys.Up]: false,
+    [ex.Input.Keys.Right]: false,
+    [ex.Input.Keys.Down]: false,
+    [ex.Input.Keys.Left]: false
+  };
+
   constructor(x: number, y: number) {
     super(x - width / 2, y - height / 2, width, height, ex.Color.Cyan);
+  }
+
+  public onInitialize(engine: ex.Engine) {
+    engine.input.keyboard.on("press", ev => {
+      if (!ev) {
+        return;
+      }
+      if (ev.key in this.pressedKeys) {
+        this.pressedKeys[ev.key] = true;
+      }
+    });
+
+    engine.input.keyboard.on("release", ev => {
+      if (!ev) {
+        return;
+      }
+      if (ev.key in this.pressedKeys) {
+        this.pressedKeys[ev.key] = false;
+      }
+    });
+  }
+
+  public update() {
+    const directionVec = this._getDirectionVec();
+
+    // console.log(this.pressedKeys);
+
+    this.pos = this.pos.add(directionVec);
   }
 
   public draw(ctx: CanvasRenderingContext2D, delta: number) {
@@ -19,6 +57,23 @@ export class Doggy extends ex.Actor {
     this._drawTail(ctx);
 
     ctx.restore();
+  }
+
+  private _getDirectionVec() {
+    const vectors = [];
+    if (this.pressedKeys[ex.Input.Keys.Up]) {
+      vectors.push(new ex.Vector(0, -1));
+    }
+    if (this.pressedKeys[ex.Input.Keys.Down]) {
+      vectors.push(new ex.Vector(0, 1));
+    }
+    if (this.pressedKeys[ex.Input.Keys.Right]) {
+      vectors.push(new ex.Vector(1, 0));
+    }
+    if (this.pressedKeys[ex.Input.Keys.Left]) {
+      vectors.push(new ex.Vector(-1, 0));
+    }
+    return vectors.reduce((a, b) => a.add(b), new ex.Vector(0, 0));
   }
 
   private _drawTail(ctx: CanvasRenderingContext2D) {
