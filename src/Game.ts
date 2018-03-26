@@ -1,5 +1,4 @@
 import * as ex from "excalibur";
-import { Level1 } from "./Scenes/Level1";
 
 export class Game extends ex.Engine {
   constructor() {
@@ -7,9 +6,6 @@ export class Game extends ex.Engine {
   }
 
   public start() {
-    this.add("level1", new Level1());
-    return super.start().then(() => {
-      this.goToScene("level1");
-    });
+    return super.start();
   }
 }
