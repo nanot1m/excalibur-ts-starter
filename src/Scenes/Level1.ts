@@ -1,7 +1,7 @@
-import * as ex from "excalibur";
 import { Doggy } from "../Chars/Doggy";
+import { Scene } from "excalibur";
 
-export class Level1 extends ex.Scene {
+export class Level1 extends Scene {
   public onActivate() {
     // const width = this.engine.drawWidth;
     // const height = this.engine.drawHeight;

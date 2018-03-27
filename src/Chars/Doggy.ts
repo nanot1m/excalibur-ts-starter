@@ -1,4 +1,4 @@
-import * as ex from "excalibur";
+import { Actor, Input, Vector, Color } from "excalibur";
 
 const width = 40;
 const height = 40;
@@ -6,12 +6,12 @@ const height = 40;
 const ROTATE_SPEED = 1 / 12;
 const MOVE_SPEED = 2 * 1e-1;
 
-export class Doggy extends ex.Actor {
+export class Doggy extends Actor {
   private pressedKeys: { [key: number]: boolean } = {
-    [ex.Input.Keys.Up]: false,
-    [ex.Input.Keys.Right]: false,
-    [ex.Input.Keys.Down]: false,
-    [ex.Input.Keys.Left]: false
+    [Input.Keys.Up]: false,
+    [Input.Keys.Right]: false,
+    [Input.Keys.Down]: false,
+    [Input.Keys.Left]: false
   };
 
   private seed: number = 0;
@@ -19,7 +19,7 @@ export class Doggy extends ex.Actor {
   private interval: number = 0;
 
   constructor(x: number, y: number) {
-    super(x - width / 2, y - height / 2, width, height, ex.Color.Cyan);
+    super(x - width / 2, y - height / 2, width, height, Color.Cyan);
   }
 
   public onInitialize(engine: ex.Engine) {
@@ -72,25 +72,25 @@ export class Doggy extends ex.Actor {
 
   private _getDirectionVec() {
     const vectors = [];
-    if (this.pressedKeys[ex.Input.Keys.Up]) {
-      vectors.push(new ex.Vector(0, -1));
+    if (this.pressedKeys[Input.Keys.Up]) {
+      vectors.push(new Vector(0, -1));
     }
-    if (this.pressedKeys[ex.Input.Keys.Down]) {
-      vectors.push(new ex.Vector(0, 1));
+    if (this.pressedKeys[Input.Keys.Down]) {
+      vectors.push(new Vector(0, 1));
     }
-    if (this.pressedKeys[ex.Input.Keys.Right]) {
-      vectors.push(new ex.Vector(1, 0));
+    if (this.pressedKeys[Input.Keys.Right]) {
+      vectors.push(new Vector(1, 0));
     }
-    if (this.pressedKeys[ex.Input.Keys.Left]) {
-      vectors.push(new ex.Vector(-1, 0));
+    if (this.pressedKeys[Input.Keys.Left]) {
+      vectors.push(new Vector(-1, 0));
     }
-    return vectors.reduce((a, b) => a.add(b), new ex.Vector(0, 0));
+    return vectors.reduce((a, b) => a.add(b), new Vector(0, 0));
   }
 
   private _drawTail(ctx: CanvasRenderingContext2D) {
     const dx = this.seed / 3 - 1.8;
 
-    ctx.fillStyle = ex.Color.Black.toString();
+    ctx.fillStyle = Color.Black.toString();
     ctx.beginPath();
     ctx.arc(dx, height * 9 / 16, width / 6, 0, 2 * Math.PI);
     ctx.closePath();
@@ -104,7 +104,7 @@ export class Doggy extends ex.Actor {
 
   private _drawEye(x: number, y: number, ctx: CanvasRenderingContext2D) {
     const dx = this.seed % 3 - 0.5;
-    ctx.fillStyle = ex.Color.White.toString();
+    ctx.fillStyle = Color.White.toString();
     ctx.beginPath();
     ctx.rect(x - dx, y, width / 4, height / 4);
     ctx.closePath();
@@ -119,7 +119,7 @@ export class Doggy extends ex.Actor {
   private _drawEar(x: number, y: number, ctx: CanvasRenderingContext2D) {
     const dx = this.seed % 2 - 0.5;
 
-    ctx.fillStyle = ex.Color.Black.toString();
+    ctx.fillStyle = Color.Black.toString();
     ctx.beginPath();
     ctx.rect(dx + x, y, width / 2, height / 2);
     ctx.closePath();

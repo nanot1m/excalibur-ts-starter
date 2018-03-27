@@ -1,4 +1,4 @@
-import * as ex from "excalibur";
+import { Actor, Texture, SpriteSheet } from "excalibur";
 
 const width = 64;
 const height = 64;
@@ -9,15 +9,15 @@ const SpriteInfo = {
   path: "/assets/sprites/dude_nude.png"
 };
 
-export class DudeNude extends ex.Actor {
-  static texture = new ex.Texture(SpriteInfo.path);
+export class DudeNude extends Actor {
+  static texture = new Texture(SpriteInfo.path);
 
   constructor(x: number, y: number) {
     super(x, y, width, height);
   }
 
   public onInitialize(engine: ex.Engine) {
-    const spriteSheet = new ex.SpriteSheet({
+    const spriteSheet = new SpriteSheet({
       columns: SpriteInfo.cols,
       rows: SpriteInfo.rows,
       spHeight: height,

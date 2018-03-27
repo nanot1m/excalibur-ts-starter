@@ -1,11 +1,11 @@
-import * as ex from "excalibur";
+import { Engine, DisplayMode } from "excalibur";
 
-export class Game extends ex.Engine {
+export class Game extends Engine {
   constructor() {
     super({
       width: 800,
       height: 600,
-      displayMode: ex.DisplayMode.FullScreen
+      displayMode: DisplayMode.FullScreen
     });
   }
 }
