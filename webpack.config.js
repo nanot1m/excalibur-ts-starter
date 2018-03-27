@@ -2,10 +2,44 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackExternalsPlugin = require("html-webpack-externals-plugin");
+
+const isDev = process.env.NODE_ENV !== "production";
+
+const plugins = isDev
+  ? [
+      new CopyWebpackPlugin([path.resolve(__dirname, "public")]),
+      new HtmlWebPackPlugin({
+        title: "Excalibur Webpack Sample"
+      })
+    ]
+  : [
+      new CleanWebpackPlugin(["dist"]),
+      new CopyWebpackPlugin([path.resolve(__dirname, "public")]),
+      new HtmlWebPackPlugin({
+        title: "Excalibur Webpack Sample"
+      }),
+      new HtmlWebpackExternalsPlugin({
+        externals: [
+          {
+            module: "excalibur",
+            entry: "dist/excalibur.min.js",
+            global: "ex"
+          }
+        ]
+      })
+    ];
 
 module.exports = {
-  entry: "./src/index.ts",
-  devtool: "inline-source-map",
+  entry: {
+    game: "./src/index.ts"
+  },
+  externals: isDev
+    ? {}
+    : {
+        excalibur: "excalibur"
+      },
+  devtool: isDev ? "inline-source-map" : "source-map",
   devServer: {
     contentBase: "./dist"
   },
@@ -22,14 +56,8 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"]
   },
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist")
   },
-  plugins: [
-    new CleanWebpackPlugin(["dist"]),
-    new CopyWebpackPlugin([path.resolve(__dirname, "public")]),
-    new HtmlWebPackPlugin({
-      title: "Excalibur Webpack Sample"
-    })
-  ]
+  plugins
 };

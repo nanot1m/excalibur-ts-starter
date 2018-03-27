@@ -6,6 +6,8 @@
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
+    "cross-env": "^5.1.4",
+    "html-webpack-externals-plugin": "^3.7.0",
     "html-webpack-plugin": "^3.1.0",
     "ts-loader": "^4.1.0",
     "typescript": "^2.7.2",
@@ -17,7 +19,7 @@
     "excalibur": "^0.15.0"
   },
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "webpack-dev-server --mode development --open"
   }
 }
