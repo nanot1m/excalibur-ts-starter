@@ -1,11 +1,11 @@
-import { Engine, DisplayMode } from "excalibur";
+import { DisplayMode, Engine } from "excalibur";
 
 export class Game extends Engine {
   constructor() {
     super({
-      width: 800,
+      displayMode: DisplayMode.FullScreen,
       height: 600,
-      displayMode: DisplayMode.FullScreen
+      width: 800
     });
   }
 }

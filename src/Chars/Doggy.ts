@@ -1,4 +1,4 @@
-import { Actor, Input, Vector, Color } from "excalibur";
+import { Actor, Color, Input, Vector } from "excalibur";
 
 const width = 40;
 const height = 40;

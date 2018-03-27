@@ -1,8 +1,9 @@
-import { Game } from "./Game";
-import { Doggy } from "./Chars/Doggy";
-import { Level1 } from "./Scenes/Level1";
-import { DudeNude } from "./Chars/DudeNude";
 import { Loader } from "excalibur";
+
+import { Doggy } from "./Chars/Doggy";
+import { DudeNude } from "./Chars/DudeNude";
+import { Game } from "./Game";
+import { Level1 } from "./Scenes/Level1";
 
 const game = new Game();
 const levelOne = new Level1();

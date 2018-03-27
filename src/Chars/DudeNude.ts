@@ -1,4 +1,4 @@
-import { Actor, Texture, SpriteSheet } from "excalibur";
+import { Actor, Engine, SpriteSheet, Texture } from "excalibur";
 
 const width = 64;
 const height = 64;
@@ -10,13 +10,13 @@ const SpriteInfo = {
 };
 
 export class DudeNude extends Actor {
-  static texture = new Texture(SpriteInfo.path);
+  public static texture = new Texture(SpriteInfo.path);
 
   constructor(x: number, y: number) {
     super(x, y, width, height);
   }
 
-  public onInitialize(engine: ex.Engine) {
+  public onInitialize(engine: Engine) {
     const spriteSheet = new SpriteSheet({
       columns: SpriteInfo.cols,
       rows: SpriteInfo.rows,
