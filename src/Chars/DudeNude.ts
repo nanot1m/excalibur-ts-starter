@@ -1,17 +1,15 @@
-import { Actor, Engine, SpriteSheet, Texture } from "excalibur";
+import { Actor, Engine, SpriteSheet } from "excalibur";
+import { Resources } from "../Resources";
 
 const width = 64;
 const height = 64;
 
 const SpriteInfo = {
   cols: 13,
-  rows: 21,
-  path: "/assets/sprites/dude_nude.png"
+  rows: 21
 };
 
 export class DudeNude extends Actor {
-  public static texture = new Texture(SpriteInfo.path);
-
   constructor(x: number, y: number) {
     super(x, y, width, height);
   }
@@ -22,7 +20,7 @@ export class DudeNude extends Actor {
       rows: SpriteInfo.rows,
       spHeight: height,
       spWidth: width,
-      image: DudeNude.texture
+      image: Resources.DudeNude
     });
 
     const castAnimation = spriteSheet.getAnimationBetween(
